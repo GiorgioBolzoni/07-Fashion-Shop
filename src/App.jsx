@@ -69,26 +69,38 @@ function App() {
 
   const ctxValue = {
     items: shoppingCart.items,
-    addItemToCart: handleAddItemToCart //così ogni figlio del componente CartContext che ha questo valore può richiamare questa funzione
+    addItemToCart: handleAddItemToCart, //così ogni figlio del componente CartContext che ha questo valore può richiamare questa funzione
+    updateItemQuantity: handleUpdateCartItemQuantity,
   };
 
   return (
     <CartContext.Provider value={ ctxValue }> 
       {/* Provider è una proprietà fornita da React per passare un Context creato da React oltre ad 'items' che ho creato io */}
       {/* value={ shoppingCart } mi permette di collegare il Context allo State ma non sto ancora utilizzando effettivamente il Context, perciò uso "const ctxValue"*/}
-      <Header
-        cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-      />
+      <Header />
       <Shop>
         {DUMMY_PRODUCTS.map((product) => (
             <li key={product.id}>
-              <Product {...product} onAddToCart={handleAddItemToCart} />
+              <Product {...product} />
             </li>
           ))}
       </Shop>
     </CartContext.Provider>
+
   );
 }
 
 export default App;
+
+
+  // un'alternativa a .Provider è .Consumer ma è più vecchia e necessita di una funzione come 'children'
+  // <CartContext.Consumer>
+  //   {(CartContext) => { 
+  //     const totalPrice = items.reduce(
+  //   (acc, item) => acc + item.price * item.quantity,
+  //   0
+  // );
+  //   } }
+  //   ......
+  // </CartContext.Consumer>
+ 

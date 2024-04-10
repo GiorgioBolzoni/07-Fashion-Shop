@@ -68,8 +68,8 @@ function App() {
   }
 
   return (
-    <CartContext.Provider> 
-      {/* Provider è una proprietà fornita da React per passare un Context creato da React */}
+    <CartContext.Provider value={{ items: [] }}> 
+      {/* Provider è una proprietà fornita da React per passare un Context creato da React oltre ad 'items' che ho creato io */}
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}

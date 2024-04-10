@@ -67,9 +67,15 @@ function App() {
     });
   }
 
+  const ctxValue = {
+    items: shoppingCart.items,
+    addItemToCart: handleAddItemToCart //così ogni figlio del componente CartContext che ha questo valore può richiamare questa funzione
+  };
+
   return (
-    <CartContext.Provider value={{ items: [] }}> 
+    <CartContext.Provider value={ ctxValue }> 
       {/* Provider è una proprietà fornita da React per passare un Context creato da React oltre ad 'items' che ho creato io */}
+      {/* value={ shoppingCart } mi permette di collegare il Context allo State ma non sto ancora utilizzando effettivamente il Context, perciò uso "const ctxValue"*/}
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
